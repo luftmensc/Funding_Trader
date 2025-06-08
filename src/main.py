@@ -119,7 +119,7 @@ def main():
             secs_since_hour = now.minute * 60 + now.second
             secs_until_hour = 3600 - secs_since_hour
 
-            if 1:
+            if secs_until_hour <= WINDOW_SEC:
                 trigger_msg = f"Trigger window ({WINDOW_SEC}s to hour end) detected."
                 print(f"{now.isoformat()}  ▶ {trigger_msg}")
                 logger.info(trigger_msg)
