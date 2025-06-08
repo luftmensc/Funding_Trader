@@ -10,14 +10,14 @@ from telegram_alert import TelegramBot
 import requests  # needed for safe_get_threshold_pairs
 
 # ─── GLOBAL SETTINGS ──────────────────────────────────────────────────────────
-THRESHOLD_PCT            = 0.3    # funding‐rate threshold (in %)
+THRESHOLD_PCT            = 0.4    # funding‐rate threshold (in %)
 USDT_AMOUNT              = 100.0   # USDT to allocate per trade (per symbol)
 WINDOW_SEC               = 10      # seconds before the hour to trigger (xx:59:50 – xx:60:00)
 
-TAKE_PROFIT_BUFFER_PCT   = 0.5     # extra % on top of |funding_rate| for TP
-STOP_LOSS_PCT            = 0.5     # % for stop‐loss on the adverse side
+# multiplier for take profit (TP) based on funding rate.
+MULTIPLIER              = 2.0   
 
-LOG_FILE                 = "../log/trading_logs.log"
+LOG_FILE                 = "./log/trading_logs.log"
 # ──────────────────────────────────────────────────────────────────────────────
 
 
@@ -110,7 +110,7 @@ def main():
     ))
     logger.info(
         f"Configuration → THRESHOLD_PCT={THRESHOLD_PCT:.2f}%, USDT_AMOUNT={USDT_AMOUNT:.2f}, "
-        f"TAKE_PROFIT_BUFFER_PCT={TAKE_PROFIT_BUFFER_PCT:.2f}, STOP_LOSS_PCT={STOP_LOSS_PCT:.2f}"
+        f"WINDOW_SEC={WINDOW_SEC}s, MULTIPLIER={MULTIPLIER:.2f}"
     )
 
     while True:
@@ -145,8 +145,8 @@ def main():
                         logger.error(err)
                         continue
 
-                    tp_pct = abs(rate_pct) + TAKE_PROFIT_BUFFER_PCT
-                    sl_pct = STOP_LOSS_PCT
+                    tp_pct = abs(rate_pct) * MULTIPLIER
+                    sl_pct = abs(rate_pct)
 
                     if direction == 'long':
                         raw_sl = entry_price * (1 - sl_pct/100)

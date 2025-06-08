@@ -1,0 +1,6 @@
+2025-06-08 17:13:31,704  INFO: Starting funding‐rate watcher.
+2025-06-08 17:15:49,984  INFO: Starting funding‐rate watcher.
+2025-06-08 17:15:50,249  INFO: Configuration → THRESHOLD_PCT=0.40%, USDT_AMOUNT=100.00, WINDOW_SEC=10s, MULTIPLIER=2.00
+2025-06-08 17:15:50,249  INFO: Trigger window (10s to hour end) detected.
+2025-06-08 17:15:51,053  INFO: After threshold filter (0.40%), coins left: 0
+2025-06-08 17:15:56,260  INFO: KeyboardInterrupt received. Exiting cleanly.
