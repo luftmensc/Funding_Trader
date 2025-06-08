@@ -11,7 +11,7 @@ A Python framework for scanning Binance funding rates and auto-trading with Tele
 ## Quickstart
 
 ```bash
-git clone https://github.com/<your-username>/strategy-trader.git
+git clone https://github.com/luftmensc/Funding_Trader.git
 cd strategy-trader
 
 # 1. Create & activate virtualenv
